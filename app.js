@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const shell = require('shelljs');
+const PORT = 3000;
 var bodyParser = require('body-parser')
 
 //View engine
@@ -12,7 +13,7 @@ app.use(express.urlencoded({ extended: true}));
 app.use(bodyParser.json())
 var docker_status;
 
-const server = app.listen(3000, () => {
+const server = app.listen(PORT, () => {
   console.log(`Express running → PORT ${server.address().port}`);
 });
 
@@ -22,7 +23,8 @@ app.get('/', (req, res) => {
 
 app.post('/load_docker', (req, res) => {
   var docker_name = req.body.Tensor;
-  docker_status = shell.exec(`sudo docker run hello-world`, {silent:true}).stdout;
+  console.log("Backend of docker container")
+  docker_status = shell.exec(`./host_volume/test.sh`)
   shell.echo(`${docker_status}`);
   res.redirect('/');
 });

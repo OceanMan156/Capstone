@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+   web:
+     build: .
+     volumes:
+       - .:/home/node/app
+       - /home/node/app/node_modules
+       - ./host_volume/:/home/node/app/host_volume/
+     ports:
+       - "3000:3000"
