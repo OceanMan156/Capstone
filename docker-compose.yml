@@ -8,3 +8,14 @@ services:
        - ./host_volume/:/home/node/app/host_volume/
      ports:
        - "3000:3000"
+
+   jupyter:
+     build: 
+       context: .
+       dockerfile: ./tensor_flow/Dockerfile
+     environment:
+       - JUPYTER_TOKEN=${JUPYTER_PASSWORD}
+     volumes:
+       - ./tensor_flow/:/home/jovyan/work
+     ports:
+       - "8888:8888"
