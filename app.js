@@ -1,14 +1,15 @@
-const express = require('express');
 const app = express();
-const shell = require('shelljs');
+import shell from "shelljs";
+import fetch from "node-fetch";
+import express from "express";
+import bodyParser from "body-parser";
 const PORT = 3000;
-var bodyParser = require('body-parser')
 
 //View engine
 app.set('view engine', 'ejs');
 app.set('views', 'routes');
 
-app.use(express.static('public'));
+app.use(express.static('tensor_flow/Samples'));
 app.use(express.urlencoded({ extended: true}));
 app.use(bodyParser.json())
 var docker_status;
@@ -24,8 +25,8 @@ app.get('/', (req, res) => {
 app.post('/load_docker', (req, res) => {
   var docker_name = req.body.Tensor;
   console.log("Backend of docker container")
-  docker_status = shell.exec(`./host_volume/test.sh`)
-  shell.echo(`${docker_status}`);
+  const status = shell.exec(`curl -X GET http://127.0.0.1:8888/api/sessions?token=test`);
+  console.log(status);
   res.redirect('/');
 });
 
