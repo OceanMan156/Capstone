@@ -8,16 +8,24 @@
         <img src = "MNIST_1_Epochs_Examples.png" /> 
     </div>
     <div class="APIS">
-        <h2>Welcome</h2>
+        <h2>Available API Calls</h2>
+        <hr /><p> GET Sessions </p>
         <p>
-          <form action="/load_docker" method="POST">
-            <!-- Creating the parameter Username as type= "text"-->
-            <label>Load Docker: </label>
-            <input type="text" placeholder="Docker name" name="Tensor"><br><br>
+          <form action="/get_session" method="GET">
+            <label>Get Available Session: </label>
             <!-- Creating the submit button -->
             <button>Submit</button>
           </form>
         </p>
+        <% if(sessions.length > 0){ %>
+            <% sessions.forEach(session => { %>
+                <h3> Session Name: <%= session.name%> </h3>
+                <p> Activity: <%= session.kernel.last_activity%> </p>
+                <p> Status: <%= session.kernel.execution_state%> </p>
+            <% }) %>
+        <% } else { %>
+            <p>Currently No Session Available</p>
+        <% } %>
     </div>
 </body>
 </html>
