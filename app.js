@@ -1,11 +1,14 @@
 const app = express();
 import shell from "shelljs";
-import fetch from "node-fetch";
 import express from "express";
 import bodyParser from "body-parser";
+import fs from "fs"
 
 const PORT = 3000;
+const IMAGEPATH = "./tensor_flow/Samples"
 let SESSIONS = [];
+let DIRCONTENTS = [];
+let needReload;
 
 //View engine
 app.set('view engine', 'ejs');
@@ -19,9 +22,15 @@ const server = app.listen(PORT, () => {
   console.log(`Express running → PORT ${server.address().port}`);
 });
 
+function getImageFiles(){
+  shell.cd(IMAGEPATH);
+  DIRCONTENTS = shell.exec(`ls *.png`).stdout.trim().split("\n");
+  shell.cd("../../");
+}
+
 app.get('/', (req, res) => {
-  console.log(SESSIONS);
-  res.render('index.ejs', {title: 'HOME', sessions: SESSIONS});
+  getImageFiles();
+  res.render('index.ejs', {title: 'HOME', sessions: SESSIONS, files: DIRCONTENTS});
 });
 
 app.get('/get_session', (req, res) => {
