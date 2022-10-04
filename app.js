@@ -39,6 +39,12 @@ app.get('/get_session', (req, res) => {
   res.redirect('/');
 });
 
+// app.post('/create_session', (req, res) => {
+//   SESSIONS = shell.exec(`curl -X GET http://127.0.0.1:8888/api/sessions?token=test`).stdout;
+//   SESSIONS = JSON.parse(SESSIONS);
+//   res.redirect('/');
+// });
+
 app.get('/shell_test', (req, res) => {
   shell.echo("We in term");
   res.status(404).render('404', { title: '404' });
