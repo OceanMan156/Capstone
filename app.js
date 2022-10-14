@@ -2,13 +2,11 @@ const app = express();
 import shell from "shelljs";
 import express from "express";
 import bodyParser from "body-parser";
-import fs from "fs"
 
 const PORT = 3000;
 const IMAGEPATH = "./tensor_flow/Samples"
 let SESSIONS = [];
 let DIRCONTENTS = [];
-let needReload;
 
 //View engine
 app.set('view engine', 'ejs');
