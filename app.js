@@ -37,11 +37,18 @@ app.get('/get_session', (req, res) => {
   res.redirect('/');
 });
 
-// app.post('/create_session', (req, res) => {
-//   SESSIONS = shell.exec(`curl -X GET http://127.0.0.1:8888/api/sessions?token=test`).stdout;
-//   SESSIONS = JSON.parse(SESSIONS);
-//   res.redirect('/');
-// });
+app.post('/create_session', (req, res) => {
+  console.log(req.body);
+  const body = {
+    notebookname: req.body.notebook,
+  }
+
+  let test = shell.exec(`curl -d '${JSON.stringify(body)}' \
+                          -H 'Content-Type: application/json' \
+                          http://127.0.0.1:8080/session `).stdout;
+  console.log(test);
+  res.redirect('/');
+});
 
 app.get('/shell_test', (req, res) => {
   shell.echo("We in term");

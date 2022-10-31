@@ -3,7 +3,6 @@ RUN apt-get update && apt-get -y install curl
 WORKDIR /home/node/app
 ENV PATH /app/node_modules/.bin:$PATH
 EXPOSE 3000
-COPY . .
 
 ENTRYPOINT node app.js
 

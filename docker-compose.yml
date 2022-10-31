@@ -5,19 +5,18 @@ services:
      network_mode: "host" 
      volumes:
        - .:/home/node/app
-       - /home/node/app/node_modules
-       - ./host_volume/:/home/node/app/host_volume/
      ports:
        - "3000:3000"
 
    jupyter:
      build: 
        context: .
-       dockerfile: ./tensor_flow/Dockerfile
+       dockerfile: ./webhook/Dockerfile
      environment:
-       - JUPYTER_TOKEN=${JUPYTER_PASSWORD}
+       - JUPYTER_TOKEN=migi
      network_mode: "host" 
      volumes:
        - ./tensor_flow/:/home/jovyan/work
+       - ./webhook/:/home/jovyan/webhook
      ports:
        - "8888:8888"
