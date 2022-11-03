@@ -11,14 +11,17 @@ def make_noise(n, z):
 
 n = 5
 z = 100
-Generator = tf.keras.models.load_model('Generator_Faces.h5')
+
+path = os.getcwd() + "/OneDrive - sunyit.edu/Capstone/Capstone/tensor_flow"
+Generator = tf.keras.models.load_model(path + '/Generator.h5')
 samples = Generator.predict(make_noise(n,z))
+samples = (samples + 1.0) / 2.0
 plt.figure(figsize=(15,6))
 for i in range(n):
     plt.subplot(1,n, (i+1))
     plt.imshow(samples[i].reshape(128,128,3))
     plt.axis('off')
-plt.savefig("Sample_From_Loaded_Model",
+plt.savefig(path + "/ProducedSamples/Sample_From_Loaded_Model",
            bbox_inches='tight',
            pad_inches = 0.5,
            transparent = False,
