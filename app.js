@@ -12,6 +12,7 @@ let DIRCONTENTS = [];
 app.set('view engine', 'ejs');
 app.set('views', 'routes');
 
+app.use(express.static('public'));
 app.use(express.static('tensor_flow/Samples'));
 app.use(express.urlencoded({ extended: true}));
 app.use(bodyParser.json())
