@@ -1,0 +1,322 @@
+@font-face {
+  font-family: Montserrat;
+  src: url(fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
+}
+
+*
+{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Montserrat;
+  scroll-behavior: smooth;
+}
+
+.menu
+{
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: #000 url(images/menu-bar.png);
+  background-size: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.menu.active
+{
+  background: #000 url(images/close.png);
+  background-size: 35px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+section
+{
+  padding: 100px;
+  min-height: 100vh;
+}
+
+.banner{
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.banner .SideImage{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 500px;
+  height: 100%;
+}
+
+.banner .SideImage img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.banner .ContentBox,
+.sidebar
+{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc(100% - 500px);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px;
+}
+
+.Logo
+{
+  position: absolute;
+  top: 40px;
+  left: 100px;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: #333;
+  color: #fff;
+  padding: 0 5px;
+}
+
+.banner .ContentBox h4{
+  font-size: 1.5em;
+  color: #333;
+  font-weight: 300;
+}
+
+.banner .ContentBox h4 span{
+  color: #00bcd4;
+  font-size: 1.5em;
+  font-weight: 700;
+}
+
+.banner .ContentBox h2{
+  color: #333;
+  font-size: 3em;
+  line-height: 1em;
+}
+
+p{
+  font-size: 1.1em;
+  margin: 20px 0;
+  font-weight: 300;
+}
+
+.btn{
+  background: #00bcd4;
+  color: #fff;
+  padding: 10px 30px;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+
+.sidebar{
+  position: fixed;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  padding: 40px;
+  z-index: 100;
+  right: -100%;
+}
+
+.sidebar.active{
+  right: 0;
+}
+
+.sidebar ul{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.sidebar ul li{
+  list-style: none;
+}
+
+.sidebar ul li a{
+  color: #fff;
+  text-decoration: none;
+  font-size: 2em;
+  margin: 10px 0;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.sidebar ul li a:hover{
+  color: #00bcd4;
+}
+
+.title{
+  width: 100%;
+  text-align: center;
+}
+
+.title p{
+  max-width: 700px;
+  display: inline-block;
+}
+
+.title h2{
+  position: relative;
+  color: #00bcd4;
+  font-size: 1.8em;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.title h2::before{
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -10px;
+  width: 60px;
+  height: 4px;
+  background: #000;
+}
+
+.title.white h2,
+.title.white p
+{
+  color: #fff;
+}
+
+.title.white h2::before{
+  background: #fff;
+}
+.about{
+  background: #000;
+}
+
+.about .content,
+.currentAI .content{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.about .content .textBox{
+  min-width: 49%;
+  width: 49%;
+}
+
+.about .content .textBox p{
+  color: #fff;
+}
+
+.about .content .imageBox,
+.currentAI .content .imageBox img{
+  margin-left: 40px;
+}
+
+.about .content .imageBox img,
+.currentAI .content .imageBox img{
+  max-width: 100%;
+}
+
+.about .content .imageBox .slide-show .slide img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 300px;
+}
+
+.slide-show {
+  max-width: 1500px;
+  position: relative;
+  margin: auto;
+}
+
+.slide {
+  display: none;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover{
+  background-color: rgb(255, 255, 255, 0.8);
+}
+
+.caption {
+  color: black;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+.numberText {
+  color: black;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+.fade {
+  animation-name: fade;
+  animation-duration: 1s;
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+.apiCalls .content{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.apiCalls .content .apiBox{
+  padding: 40px 45px;
+  max-width: 340px;
+  margin: 20px;
+  transition: 0.5s;
+  text-align: center;
+  background: #f5f5f5;
+}
+
