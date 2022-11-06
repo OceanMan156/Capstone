@@ -1,6 +1,15 @@
+* {box-sizing: border-box}
+body {
+  background-image: url("Website.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: Verdana, sans-serif; 
+  margin: 0;
+}
 h1{
   text-align: center;
 }
+
 img {
   display: block;
   margin-left: auto;
@@ -10,9 +19,29 @@ img {
 }
 
 .slide-show {
-  max-width: 1000px;
+  max-width: 1500px;
   position: relative;
   margin: auto;
+}
+
+.Title {
+  text-align: center;
+}
+
+.APIS {
+  text-align: center;
+}
+
+.APIOne {
+  position: absolute;
+  top: auto;
+  left: 10%;
+}
+
+.APITwo {
+  position: absolute;
+  top: auto;
+  left: 39%;
 }
 
 .slide {
@@ -43,8 +72,18 @@ img {
   background-color: rgb(255, 255, 255, 0.8);
 }
 
+.caption {
+  color: black;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
 .numberText {
-  color: #f2f2f2;
+  color: black;
   font-size: 12px;
   padding: 8px 12px;
   position: absolute;
