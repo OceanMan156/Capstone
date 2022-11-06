@@ -7,6 +7,7 @@ const PORT = 3000;
 const IMAGEPATH = "./tensor_flow/Samples"
 let SESSIONS = [];
 let DIRCONTENTS = [];
+let TRAINPROGRESS = null;
 
 //View engine
 app.set('view engine', 'ejs');
@@ -27,19 +28,24 @@ function getImageFiles(){
   shell.cd("../../");
 }
 
+function getAI(){
+  let aihtml = shell.exec(`curl -X GET http://localhost:8080/ai `);
+  console.log(aihtml);
+}
+
 app.get('/', (req, res) => {
   getImageFiles();
-  res.render('index.ejs', {title: 'HOME', sessions: SESSIONS, files: DIRCONTENTS});
+  getAI();
+  res.render('index.ejs', {title: 'HOME', sessions: SESSIONS, files: DIRCONTENTS, trainProgress:TRAINPROGRESS});
 });
 
 app.get('/get_session', (req, res) => {
-  SESSIONS = shell.exec(`curl -X GET http://127.0.0.1:8888/api/sessions?token=test`).stdout;
+  SESSIONS = shell.exec(`curl -X GET http://127.0.0.1:8888/api/sessions?token=migi`).stdout;
   SESSIONS = JSON.parse(SESSIONS);
   res.redirect('/');
 });
 
 app.post('/create_session', (req, res) => {
-  console.log(req.body);
   const body = {
     notebookname: req.body.notebook,
   }
@@ -47,8 +53,9 @@ app.post('/create_session', (req, res) => {
   let test = shell.exec(`curl -d '${JSON.stringify(body)}' \
                           -H 'Content-Type: application/json' \
                           http://127.0.0.1:8080/session `).stdout;
-  console.log(test);
-  res.redirect('/');
+  test = JSON.parse(test);
+  TRAINPROGRESS = test.response;
+  res.redirect(req.get('referer'));
 });
 
 app.get('/shell_test', (req, res) => {
