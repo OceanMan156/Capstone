@@ -15,6 +15,10 @@
           <h4>Start Training Session</h4>
           <p>
             <% if(trainProgress == null || trainProgress != "In Progress") {%>
+              <form action="/upload" method="POST" enctype="multipart/form-data">
+                <input class="input" id="files" name="folder" type="file" webkitdirectory multiple />
+                <button>Submit</button>
+              </form>
               <form action="/create_session" method="POST">
                 <input class="input" id="notebook" name="notebook" type="name" value="" placeholder="Notebook Name" />
                 <button>Submit</button>

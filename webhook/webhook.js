@@ -49,15 +49,8 @@ app.get('/ai', (req, res) => {
 });
 
 app.post('/begin_gen', async (req, res) => {
-  if(genPromise == null){
+    shell.exec("rm Samples/*");
     genPromise = shell.exec(`python load.py ${req.body.numImages}`, { async:true });
     res.json({respose: "Generation started"})
-  }else{
-    genPromise.on('exit', function (code, signal){
-      console.log('Process ended with ' + `code ${code} and signal ${signal}`);
-      genPromise = null;
-    });
-    res.json({response: "Generation in progress"});
-  }
 });
 

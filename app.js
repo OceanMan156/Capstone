@@ -2,6 +2,8 @@ const app = express();
 import shell from "shelljs";
 import express from "express";
 import bodyParser from "body-parser";
+import formidable from "formidable"; 
+import fs from 'fs';
 
 const PORT = 3000;
 const IMAGEPATH = "./tensor_flow/Samples"
@@ -55,11 +57,19 @@ app.get('/API', (req, res) => {
   res.render('function.ejs', {title: 'API', kernels: KERNELS, sessions: SESSIONS, files: DIRCONTENTS, trainProgress:TRAINPROGRESS, notebooks: NOTEBOOKS});
 });
 
+app.post('/upload', (req,res) => {
+  var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields, files) {
+      console.log(files);
+    });
+  res.redirect(req.get('referer'));
+});
+
+
 app.post('/create_session', (req, res) => {
   const body = {
     notebookname: req.body.notebook,
   }
-
   let test = shell.exec(`curl -d '${JSON.stringify(body)}' \
                           -H 'Content-Type: application/json' \
                           http://127.0.0.1:8080/session `).stdout;
