@@ -12,24 +12,21 @@ for index in range(numImg):
     def make_noise(n, z):
         return np.random.normal(0, 1, size=(n,z))
 
-    n = 10
+    n = 16
     z = 100
 
     path = os.getcwd() + "./"
-    Generator = tf.keras.models.load_model('./Generator.h5')
+    Generator = tf.keras.models.load_model(path + './Generator.h5')
     samples = Generator.predict(make_noise(n,z))
     samples = (samples + 1.0) / 2.0
-    plt.figure(figsize=(10,3))
+    plt.figure(figsize=(4,4))
     for i in range(n):
-        plt.subplot(2,int(n/2), (i+1))
-        plt.imshow(samples[i].reshape(128,128,3))
+        plt.subplot(4,4, (i+1))
+        plt.imshow(samples[i].reshape(64,64,3))
         plt.axis('off')
-
-    Path("/Samples").mkdir(parents=True, exist_ok=True)
-
-    plt.savefig(f'./Samples/Sample_From_Loaded_Model_{index}',
+        plt.savefig(f'./Samples/Sample_From_Loaded_Model_{index}',
                bbox_inches='tight',
-               pad_inches = 0.2,
+               pad_inches = 0,
                transparent = False,
                dpi =400)
     plt.show()
