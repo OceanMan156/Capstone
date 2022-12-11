@@ -1,0 +1,38 @@
+    <div class="sidebar">
+      <ul class="sidemenu">
+        <li><a href="#home" onclick="toggleMenu();">HOME</a></li>
+        <li><a href="#about" onclick="toggleMenu();">ABOUT</a></li>
+        <li><a href="#currentai" onclick="toggleMenu();">CURRENT AI</a></li>
+        <li><a href="#DevDetails" onclick="toggleMenu();">DEVELOPERS</a></li>
+        <li><a href="http://localhost:3000/API" onclick="toggleMenu();">API CALLS</a></li>
+      </ul>
+    </div>
+    <script>
+      function toggleMenu(){
+        const menu = document.querySelector('.menu');
+        const sidebar = document.querySelector('.sidebar');
+        menu.classList.toggle('active');
+        sidebar.classList.toggle('active');
+      }
+      
+      let slideIndex = 1;
+      displaySlides(slideIndex);
+
+      function displaySlides(index){
+        let slides = document.getElementsByClassName("slide");
+        // Slide Wrapping
+        if (index > slides.length){slideIndex = 1;}
+        if (index < 1){slideIndex = slides.length;}
+
+        for(let i = 0; i < slides.length; i++){
+          slides[i].style.display = "none";
+        }
+        console.log(slides.length);
+        console.log(slideIndex);
+        slides[slideIndex - 1].style.display = "block";
+      }
+
+      function nextSlide(index){
+        displaySlides(slideIndex += index);
+      }
+    </script>

@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 shell.exec("../webhook/startup.sh", {async: true});
 const PORT = 8080;
 let currentPromise = null;
+let genPromise = null
 
 let PROCESS_MSG = "In Progress"
 
@@ -37,13 +38,19 @@ app.post('/session', async (req, res) => {
 
 app.get('/ai', (req, res) => {
   let respose;
-  if(!shell.test('-e', "Samples/Capstone_Ai.pdf")){
-    respose = shell.exec(`jupyter nbconvert 'Capstone Ai.ipynb' --to pdf`);
-    shell.exec(`mv 'Capstone Ai.pdf' Capstone_Ai.pdf`);
-    shell.exec(`chmod 777 Capstone_Ai.pdf`);
-    shell.exec(`mv Capstone_Ai.pdf Samples/Capstone_Ai.pdf`)
+  if(!shell.test('-e', "Samples/GAN_BETA.pdf")){
+    respose = shell.exec(`jupyter nbconvert 'GAN_BETA.ipynb' --to pdf`);
+    shell.exec(`mv 'GAN_BETA.pdf' GAN_BETA.pdf`);
+    shell.exec(`chmod 777 GAN_BETA.pdf`);
+    shell.exec(`mv GAN_BETA.pdf Samples/GAN_BETA.pdf`)
     res.json({respose: `${respose.stderr}`})
   }else
     res.json({respose: `File already Exists`})
+});
+
+app.post('/begin_gen', async (req, res) => {
+    shell.exec("rm Samples/*");
+    genPromise = shell.exec(`python load.py ${req.body.numImages}`, { async:true });
+    res.json({respose: "Generation started"})
 });
 
