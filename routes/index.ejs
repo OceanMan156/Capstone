@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <title>AI</title>
-    <link href="style.css" rel="stylesheet">
-  </head>
+  <%- include('./partials/head.ejs') %> 
   <body>
     <div class="menu" onclick="toggleMenu();"></div>
 
@@ -21,7 +16,7 @@
           <h4>An image generating AI</h4>
           <p>Ocean AI was develop to showcase the ability to run, train and generate images
           from datasets that you can give it</p>
-          <a href="#" class="btn">Project Info</a>
+          <a href="#about" class="btn">Project Info</a>
         </div>
       </div>
     </section>
@@ -40,7 +35,7 @@
               <% files.forEach(function (image, i) { %>
                 <div class="slide fade">
                   <div class="numberText"> <%= i + 1 %> / <%= files.length%> </div>
-                  <img src = "<%= image %>" style="width:100%;">
+                  <img src = "<%= image %>" style="width: 3000px;">
                   <div class="caption"> <%= i + 1 %> generated Image </div>
                 </div>
               <% }) %>
@@ -62,97 +57,16 @@
           <p>THIS HOW THINGS WORK</p>
         </div>
         <div class="imageBox" id="AI">   
-          <object data="Capstone_Ai.pdf" 
+          <object data="GAN_BETA.pdf" 
                 width="800" 
                 height="500"> 
-            <embed src="Capstone_Ai.pdf" type="application/pdf">
+            <embed src="GAN_BETA.pdf" type="application/pdf">
           </object>
         </div>
       </div>
     </section>
-    <section class="apiCalls" id="apiCalls">
-      <div class="title">
-        <h2>Current Interactions</h2>
-        <p>Current working interactions with AI</p>
-      </div>
-      <div class="content">
-        
-        <div class="apiBox">
-          <h4>Create New Session</h4>
-          <% if(trainProgress == null || trainProgress != "In Progress") {%>
-            <form action="/create_session" method="POST">
-              <label>Notebook Name: </label>
-              <input class="input" id="notebook" name="notebook" type="name" value="" />
-              <button>Submit</button>
-            </form>
-          <% }else{ %>
-            <h2>Training In Progress</h2>
-            <form action="/create_session" method="POST">
-              <input type="input" name="button" value="Refresh" style="width: 0px; height: 0px;"/>
-              <button>Refresh</button>
-            </form>
-          <% } %>
-        </div>
-
-        <div class="apiBox">
-          <h3> Get Current Juptyper Notebook Sessions </h3>
-          <p>
-            <form action="/get_session" method="GET">
-              <label>Get Available Session: </label>
-              <!-- Creating the submit button -->
-              <button>Submit</button>
-            </form>
-          </p>
-          <% if(sessions.length > 0){ %>
-              <% sessions.forEach(session => { %>
-                  <h3> Session Name: <%= session.name%> </h3>
-                  <p> Activity: <%= session.kernel.last_activity%> </p>
-                  <p> Status: <%= session.kernel.execution_state%> </p>
-              <% }) %>
-          <% } else { %>
-              <p>Currently No Session Available</p>
-          <% } %>
-        </div>
-
-      </div>
+    <section class="DevDetails" id="DevDetails">
     </section>
-    <div class="sidebar">
-      <ul class="sidemenu">
-        <li><a href="#home" onclick="toggleMenu();">HOME</a></li>
-        <li><a href="#about" onclick="toggleMenu();">ABOUT</a></li>
-        <li><a href="#currentai" onclick="toggleMenu();">CURRENT AI</a></li>
-        <li><a href="#apiCalls">API CALLS</a></li>
-        <li><a href="#">DEVELOPERS</a></li>
-      </ul>
-    </div>
-    <script>
-      function toggleMenu(){
-        const menu = document.querySelector('.menu');
-        const sidebar = document.querySelector('.sidebar');
-        menu.classList.toggle('active');
-        sidebar.classList.toggle('active');
-      }
-      
-      let slideIndex = 1;
-      displaySlides(slideIndex);
-
-      function displaySlides(index){
-        let slides = document.getElementsByClassName("slide");
-        // Slide Wrapping
-        if (index > slides.length){slideIndex = 1;}
-        if (index < 1){slideIndex = slides.length;}
-
-        for(let i = 0; i < slides.length; i++){
-          slides[i].style.display = "none";
-        }
-        console.log(slides.length);
-        console.log(slideIndex);
-        slides[slideIndex - 1].style.display = "block";
-      }
-
-      function nextSlide(index){
-        displaySlides(slideIndex += index);
-      }
-    </script>
+    <%- include('./partials/sidebar.ejs') %>
   </body>
 </html>

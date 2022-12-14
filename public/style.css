@@ -204,7 +204,8 @@ p{
 .title.white h2::before{
   background: #fff;
 }
-.about{
+.about,
+.DevDetails{
   background: #000;
 }
 
@@ -216,8 +217,8 @@ p{
 }
 
 .about .content .textBox{
-  min-width: 49%;
-  width: 49%;
+  min-width: 40%;
+  width: 40%;
 }
 
 .about .content .textBox p{
@@ -229,6 +230,10 @@ p{
   margin-left: 40px;
 }
 
+.about .content .imageBox .slide-show .slide{
+  width: 700px;
+  height: 100%;
+}
 .about .content .imageBox img,
 .currentAI .content .imageBox img{
   max-width: 100%;
@@ -239,11 +244,11 @@ p{
   margin-left: auto;
   margin-right: auto;
   width: 100%;
-  height: 300px;
+  height: 500px;
 }
 
 .slide-show {
-  max-width: 1500px;
+  max-width: 2000px;
   position: relative;
   margin: auto;
 }
@@ -313,10 +318,38 @@ p{
 
 .apiCalls .content .apiBox{
   padding: 40px 45px;
-  max-width: 340px;
+  max-width: 350px;
+  min-width: 340px;
   margin: 20px;
   transition: 0.5s;
   text-align: center;
-  background: #f5f5f5;
+  background: #000;
+  color: #f5f5f5;
 }
 
+.apiCalls .content .apiBox button{
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.apiCalls .content .apiBox .res{
+  color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  text-indent: 15px;
+  font-size: 11px;
+}
+
+.Images{
+  background-color: black;
+}
+
+button {
+  background: #00bcd4;
+	color: #000;
+	border: 1px solid #00bcd4;
+	border-radius: 20px;
+	text-shadow: none;
+  height: 25px;
+  width: 100px;
+}
